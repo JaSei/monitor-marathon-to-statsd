@@ -13,7 +13,7 @@ go:
 after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
     CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo;
-    DOCKER_IMAGE=avast/monitor-marathon-to-statsd:$(./monitor-marathon-to-statsd --version);
+    DOCKER_IMAGE=avast/monitor-marathon-to-statsd:$(./monitor-marathon-to-statsd --version 2>&1);
     docker build -t $DOCKER_IMAGE .;
     docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
     docker push $DOCKER_IMAGE;
